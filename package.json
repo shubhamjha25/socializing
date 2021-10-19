@@ -1,0 +1,11 @@
+{
+  "name": "socializing",
+  "version": "1.0.0",
+  "description": "node socail media api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shubham Jha",
+  "license": "MIT"
+}
