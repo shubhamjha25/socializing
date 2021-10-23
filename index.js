@@ -17,6 +17,15 @@ mongoose.connect(process.env.MONGODB_URL,
         console.log("MongoDB Connected ...");
 });
 
+// Middlewares
+app.use(express.json());
+app.use(helmet());
+app.use(morgan('common'));
+
+app.get("/", (req, res) => {
+    res.send("socializing Server Running");
+})
+
 app.listen(port, () => {
     console.log(`Server Running on Port ${port}`)
 });
