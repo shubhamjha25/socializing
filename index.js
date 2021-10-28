@@ -7,6 +7,8 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
+const userRoute = require('./routes/users');
+
 dotenv.config();
 
 const port = process.env.PORT;
@@ -21,6 +23,8 @@ mongoose.connect(process.env.MONGODB_URL,
 app.use(express.json());
 app.use(helmet());
 app.use(morgan('common'));
+
+app.use("/api/users", userRoute);
 
 app.get("/", (req, res) => {
     res.send("socializing Server Running");
