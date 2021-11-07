@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 // UPDATE USER ACCOUNT DETAILS 
 router.put("/:id", async (req,res) => {
-    if(req.body.userId === req.params.id || req.user.isAdmin) {
+    if(req.body.userId === req.params.id || req.body.isAdmin) {
         // if user also updates password
         if(req.body.password) {
             try {
@@ -26,6 +26,23 @@ router.put("/:id", async (req,res) => {
     } 
     else {
         return res.status(403).json("You Can Update Only Your Account!");
+    }
+});
+
+// DELETE USER  
+router.delete("/:id", async (req,res) => {
+    if(req.body.userId === req.params.id || req.body.isAdmin) {
+        // delete user account
+        try {
+            await User.findByIdAndDelete(req.params.id);
+            res.status(200).json("Account Deleted Successfully");
+        }
+        catch(err) {
+            return res.status(500).json(err);
+        }
+    } 
+    else {
+        return res.status(403).json("You Can Delete Only Your Account!");
     }
 });
 
