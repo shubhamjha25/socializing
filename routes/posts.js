@@ -31,4 +31,21 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// DELETE A POST
+router.delete("/:id", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        // userId's should be matched
+        if(post.userId === req.body.userId) {
+            await post.deleteOne();
+            res.status(200).json("Post Deleted Successfully");
+        }
+        else {
+            res.status(403).json("Access Denied - You cannot delete other user's post");
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
