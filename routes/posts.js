@@ -48,4 +48,14 @@ router.delete("/:id", async (req, res) => {
     }
 });
 
+// GET A POST
+router.get("/:id", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        res.status(200).json(post);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
